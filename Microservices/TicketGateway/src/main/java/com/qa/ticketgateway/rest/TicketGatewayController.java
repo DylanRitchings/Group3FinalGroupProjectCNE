@@ -1,6 +1,5 @@
 package com.qa.ticketgateway.rest;
 
-import com.qa.ticketgateway.persistence.domain.Ticket;
 import com.qa.ticketgateway.service.TicketGatewayService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import java.util.List;
 @RequestMapping("/tickets")
 @RestController
 @CrossOrigin
-public class TicketGatewayController {
+public class TicketGatewayController <T> {
 
     private final TicketGatewayService service;
 
@@ -22,18 +21,18 @@ public class TicketGatewayController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Ticket> create(@RequestBody Ticket newTicket) {
-        return new ResponseEntity<>(this.service.create(newTicket), HttpStatus.CREATED);
+    public ResponseEntity<Object> create(@RequestBody T newT) {
+        return new ResponseEntity<>(this.service.create(newT), HttpStatus.CREATED);
     }
 
     @GetMapping("/readAll")
 
-    public ResponseEntity<Ticket[]> readAll(){
+    public ResponseEntity<Object[]> readAll(){
         return ResponseEntity.ok(this.service.readAll());
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<Ticket> readById(@PathVariable Long id){
+    public ResponseEntity<Object> readById(@PathVariable Long id){
         try {
             return ResponseEntity.ok(this.service.readById(id));
         } catch (Exception e) {
@@ -50,8 +49,8 @@ public class TicketGatewayController {
         }
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<Ticket> updateById(@PathVariable Long id, @RequestBody Ticket ticket) {
-        Ticket updatedObject = this.service.updateById(id, ticket);
+    public ResponseEntity<Object> updateById(@PathVariable Long id, @RequestBody T t) {
+        Object updatedObject = this.service.updateById(id, t);
         return new ResponseEntity<>(updatedObject, HttpStatus.ACCEPTED);
     }
 }

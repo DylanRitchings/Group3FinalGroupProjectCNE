@@ -1,10 +1,6 @@
 package com.qa.ticketgateway.service;
 
-import com.qa.ticketgateway.persistence.domain.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class TicketGatewayService {
+public class TicketGatewayService <T> {
 
     private final RestTemplate rest;
 
@@ -26,20 +22,20 @@ public class TicketGatewayService {
     }
 
 
-    public Ticket[] readAll(){
-        return this.rest.getForObject("https://read-all-tickets-api/", Ticket[].class);
+    public Object[] readAll(){
+        return this.rest.getForObject("https://read-all-tickets-api/", Object[].class);
 
     }
 
-    public Ticket readById(Long id) {
-        return this.rest.getForObject("https://read-ticket-api/"+id, Ticket.class);
+    public Object readById(Long id) {
+        return this.rest.getForObject("https://read-ticket-api/"+id, Object.class);
 
     }
 
-    public Ticket create(Ticket ticket) {
-        Ticket newTicket = rest.postForObject("https://create-ticket-api/", ticket, Ticket.class);
+    public Object create(T t) {
+        Object newT = rest.postForObject("https://create-ticket-api/", t, Object.class);
 
-        return newTicket;
+        return newT;
     }
 
     public Boolean deleteById(Long id) {
@@ -53,11 +49,11 @@ public class TicketGatewayService {
 
     }
 
-    public Ticket updateById(Long id, Ticket ticket) {
-        HttpEntity<Ticket> request = new HttpEntity<>(ticket);
-        ResponseEntity<Ticket> response = this.rest.exchange("https://update-ticket-api/"+id, HttpMethod.PUT, request, Ticket.class);
-        Ticket updatedTicket = response.getBody();
-        return(updatedTicket);
+    public Object updateById(Long id, T t) {
+        HttpEntity<T> request = new HttpEntity<>(t);
+        ResponseEntity<Object> response = this.rest.exchange("https://update-ticket-api/"+id, HttpMethod.PUT, request, Object.class);
+        Object updatedT = response.getBody();
+        return(updatedT);
     }
 
 }

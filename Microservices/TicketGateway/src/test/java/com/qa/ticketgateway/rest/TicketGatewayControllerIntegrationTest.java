@@ -1,7 +1,7 @@
 package com.qa.ticketgateway.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qa.ticketgateway.persistence.domain.Ticket;
+
 import com.qa.ticketgateway.service.TicketGatewayService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,9 +35,9 @@ public class TicketGatewayControllerIntegrationTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    private final static LocalDateTime DATE_TIME = LocalDateTime.of(2010, 2, 11,11,30);
-    private final Ticket TICKET1 = new Ticket(1L,"Name Naming", DATE_TIME, "Description of ticket","Title of ticket", false, "This is a new solution", "Medium", "Cohort2");
-    private final Ticket TICKET2 = new Ticket(2L,"Name2", DATE_TIME, "Name description","hjsdfklgjsdlfkjsd", false, "This is a new solution", "Medium", "Cohort2");
+//    private final static LocalDateTime DATE_TIME = LocalDateTime.of(2010, 2, 11,11,30);
+//    private final Ticket TICKET1 = new Ticket(1L,"Name Naming", DATE_TIME, "Description of ticket","Title of ticket", false, "This is a new solution", "Medium", "Cohort2");
+//    private final Ticket TICKET2 = new Ticket(2L,"Name2", DATE_TIME, "Name description","hjsdfklgjsdlfkjsd", false, "This is a new solution", "Medium", "Cohort2");
 
 //    @BeforeEach
 //    void setup() {
